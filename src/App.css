@@ -37,6 +37,11 @@
   padding: 2em;
 }
 
+.preview-image {
+  height: 200px;
+  width: 100px;
+}
+
 .read-the-docs {
   color: #888;
 }

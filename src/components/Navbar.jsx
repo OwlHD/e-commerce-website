@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 export default function NavBar() {
   return (
-    <Navbar expand="lg" className="bg-primary bg-gradient" data-bs-theme='dark'>
+    <Navbar expand="lg" className="bg-primary bg-gradient" data-bs-theme='dark' fixed='top'>
       <Container>
         <Navbar.Brand as={Link} to="/">iShop</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

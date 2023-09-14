@@ -1,5 +1,7 @@
+import HomePreview from "../components/HomePreview"
+
 export default function Home() {
     return (
-        <div>Home</div>
+        <HomePreview />
     )
 }

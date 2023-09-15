@@ -24,7 +24,7 @@ export default function HomePreview() {
             <h1>Electronics</h1>
             <ProductCarousel products={productsElectronics} />
             <br />
-            <h1>Jewelry</h1>
+            <h1>Jewelery</h1>
             <ProductCarousel products={productsJewelry} />
             <br />
             <h1>Men's Clothing</h1>

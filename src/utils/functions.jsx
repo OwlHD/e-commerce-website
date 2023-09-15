@@ -7,7 +7,7 @@ export default async function getProductsByCategory(category) {
         console.log(result)
         return result
     } catch (error) {
-        console.error(error)
+        return console.error(error)
     }
 }
 
@@ -18,6 +18,6 @@ export async function getAllProducts() {
         console.log(result)
         return result
     } catch (error) {
-        console.error(error)
+        return console.error(error)
     }
 }

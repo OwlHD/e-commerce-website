@@ -17,6 +17,7 @@ export default function NavBar() {
               <NavDropdown.Item as={Link} to="/category/2">Category 2</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/category/3">Category 3</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/category/4">Category 4</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/category/5">Category 5</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/login">Login</Nav.Link>

@@ -1,5 +1,5 @@
 import ProductCarousel from './ProductCarousel';
-import getProductsByCategory from '../utils/functions';
+import getProductsByCategory from '../../utils/functions';
 import { useState, useEffect } from 'react';
 
 export default function HomePreview() {

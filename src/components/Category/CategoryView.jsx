@@ -1,4 +1,7 @@
 import CategoryCard from "./CategoryCard"
+import CategoryQueryBar from "./CategoryQueryBar";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { useState, useEffect } from "react"
 import { getAllProducts } from "../../utils/functions"
 
@@ -17,7 +20,10 @@ export default function CategoryView({id}) {
     },[id])
     
     return (
-        <div className="row">
+        <Row>
+            <Col>
+                <CategoryQueryBar />
+            </Col>
             <h1>{idUpper}</h1>
             {(
                 id === 'all' ? productsAll.map(item =>{
@@ -26,10 +32,6 @@ export default function CategoryView({id}) {
                     return <div key={item.id} className="col-xs-12 col-sm-6 col-lg-4"><CategoryCard key={item.id} item={item} /></div>
                 })
             )}
-        </div>
+        </Row>
     )
 }
-
-/* {productsCategory.map((item) => (
-    <div key={item.id} className="col-xs-12 col-sm-6 col-lg-4"><CategoryCard key={item.id} item={item} /></div>
-))} */

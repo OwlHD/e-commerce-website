@@ -22,7 +22,7 @@ export default function CategoryView({id}) {
     return (
         <Row>
             <Col>
-                <CategoryQueryBar />
+                <CategoryQueryBar productsAll={productsAll} setProductsAll={setProductsAll} productsCategory={productsCategory} setProductsCategory={setProductsCategory} />
             </Col>
             <h1>{idUpper}</h1>
             {(

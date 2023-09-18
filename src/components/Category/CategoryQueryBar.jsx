@@ -4,10 +4,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
-export default function CategoryQueryBar({productsAll, setProductsAll, productsCategory, setProductsCategory}) {
+export default function CategoryQueryBar({id, queryProducts, setQueryProducts, productsAll, productsCategory}) {
+    const [sortProducts, setSortProducts] = useState('')
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -20,24 +20,52 @@ export default function CategoryQueryBar({productsAll, setProductsAll, productsC
     function handleChange(event) {
         if (event.target.name === 'price') {
             setFilters(filters => ({...filters, [event.target.name]:(event.target.value*10)}))
-            console.log(filters)
         } else {
             setFilters(filters => ({...filters, [event.target.name]:event.target.value}))
-            console.log(filters)
         }
     }
 
-    function handlePriceChange(e) {
+    function handlePriceChange(event) {
 
-        if (e.target.value==='false') {
-            setFilters(filters => ({...filters, [e.target.name]:'true'}))
-            console.log(filters)
+        if (event.target.value==='false') {
+            setFilters(filters => ({...filters, [event.target.name]:'true'}))
         } else {
-            setFilters(filters => ({...filters, [e.target.name]:'false'}))
-            console.log(filters)
+            setFilters(filters => ({...filters, [event.target.name]:'false'}))
         }
 
     }
+
+    function searchProducts(e) {
+        const results = productsAll.filter(product => {
+            if (e.target.value === '') {
+                return productsAll
+            } else if (product.title.toLowerCase().includes(e.target.value.toLowerCase())) {
+                return product
+            }
+        })
+        setQueryProducts({
+            query: e.target.value,
+            list: results
+        })
+    }
+
+    function searchProductsCategory(e) {
+        const results = productsCategory.filter(product => {
+            if (e.target.value === '') {
+                return productsCategory
+            } else if (product.title.toLowerCase().includes(e.target.value.toLowerCase())) {
+                return product
+            }
+        })
+        setQueryProducts({
+            query: e.target.value,
+            list: results
+        })
+    }
+
+    useEffect(()=>{
+        //TO DO: add logic for sorting products
+    },[])
 
     return (
         <>
@@ -63,15 +91,28 @@ export default function CategoryQueryBar({productsAll, setProductsAll, productsC
                 </Dropdown>
             </Col>
             <Col>
-                <Form className="d-flex">
+            {(id === 'all' 
+                ? <Form className="d-flex">
                     <Form.Control
                     type="search"
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"
+                    value={queryProducts.query}
+                    onChange={searchProducts}
                     />
-                    <Button variant="outline-success">Search</Button>
+                  </Form>
+                : <Form className="d-flex">
+                    <Form.Control
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                    value={queryProducts.query}
+                    onChange={searchProductsCategory}
+                    />
                 </Form>
+            )}
             </Col>
         </Row>
 

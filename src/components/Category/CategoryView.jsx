@@ -6,25 +6,34 @@ import { getAllProducts } from "../../utils/functions"
 
 export default function CategoryView({id}) {
     const [productsAll, setProductsAll] = useState([])
+    const [productsAllFilter, setProductsAllFilter] = useState([])
     const [productsCategory, setProductsCategory] = useState([])
     const [queryProducts, setQueryProducts] = useState({
         query: '',
-        list: []
+        list: [],
+        sorting: 'id'
     })
+    const [filters, setFilters] = useState({
+        rating: '0',
+        price:500,
+        filterByPrice: 'false'
+});
     const idUpper = id.toUpperCase()
 
     useEffect(()=>{
         async function getProducts() {
             setProductsAll(await getAllProducts())
+            setProductsAllFilter(await getAllProducts())
             setProductsCategory((await getAllProducts()).filter(item => item.category===id))
         }
         getProducts()
-        setQueryProducts({query: '', list: []})
+        setQueryProducts({query: '', list: [], sorting: queryProducts.sorting})
     },[id])
     
+    //ProdutsAll.map -> ProductsAllFilter.map
     return (
         <Row>
-            <CategoryQueryBar id={id} queryProducts={queryProducts} setQueryProducts={setQueryProducts} productsAll={productsAll} productsCategory={productsCategory} />
+            <CategoryQueryBar id={id} queryProducts={queryProducts} setQueryProducts={setQueryProducts} productsAll={productsAll} setProductsAll={setProductsAll} productsAllFilter={productsAllFilter} setProductsAllFilter={setProductsAllFilter} productsCategory={productsCategory} filters={filters} setFilters={setFilters} />
             <h1>{idUpper}</h1>
             {(
                 queryProducts.query === '' 

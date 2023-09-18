@@ -4,24 +4,34 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { useState, useEffect } from 'react';
+import { useState, } from 'react';
 
-export default function CategoryQueryBar({id, queryProducts, setQueryProducts, productsAll, productsCategory}) {
-    const [sortProducts, setSortProducts] = useState('')
+export default function CategoryQueryBar({id, queryProducts, setQueryProducts, productsAll, setProductsAll, productsAllFilter, setProductsAllFilter, productsCategory, filters, setFilters}) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [filters, setFilters] = useState({
-            rating: '3',
+    /* const [filters, setFilters] = useState({
+            rating: '0',
             price:500,
             filterByPrice: 'false'
-});
+}); */
 
     function handleChange(event) {
         if (event.target.name === 'price') {
             setFilters(filters => ({...filters, [event.target.name]:(event.target.value*10)}))
         } else {
             setFilters(filters => ({...filters, [event.target.name]:event.target.value}))
+            // console.log('filters', filters)
+            // TO DO: fix filter by rating
+            //ISSUE: correctly filters, but one step behind
+            /* const productList = productsAll
+            if(queryProducts.list.length === 0) {
+                const results = productList.filter(product => product.rating.rate >= parseInt(filters.rating))
+                setProductsAllFilter(results)    
+            } else {
+                const results = productsAll.filter(product => product.rating.rate >= parseInt(filters.rating))
+                setProductsAllFilter(results)
+            } */
         }
     }
 
@@ -43,10 +53,10 @@ export default function CategoryQueryBar({id, queryProducts, setQueryProducts, p
                 return product
             }
         })
-        setQueryProducts({
+        setQueryProducts(items => ({...items, 
             query: e.target.value,
             list: results
-        })
+        }))
     }
 
     function searchProductsCategory(e) {
@@ -57,15 +67,40 @@ export default function CategoryQueryBar({id, queryProducts, setQueryProducts, p
                 return product
             }
         })
-        setQueryProducts({
+        setQueryProducts(items => ({...items, 
             query: e.target.value,
             list: results
-        })
+        }))
+        console.log('search catregory', queryProducts)
     }
 
-    useEffect(()=>{
-        //TO DO: add logic for sorting products
-    },[])
+    function sortProducts(e) {
+        const {list} = queryProducts
+        console.log('start', list)
+        if (e === 'id') {
+            list.sort((a, b) => a.id - b.id)
+            productsAll.sort((a, b) => a.id - b.id)
+            productsCategory.sort((a, b) => a.id - b.id)
+            console.log('after sort', list)
+        } else if (e ==='lowToHigh') {
+            list.sort((a, b) => a.price - b.price)
+            productsAll.sort((a, b) => a.price - b.price)
+            productsCategory.sort((a, b) => a.price - b.price)
+            console.log('after sort', list)
+        } else if (e === 'highToLow') {
+            list.sort((a, b) => b.price - a.price)
+            productsAll.sort((a, b) => b.price - a.price)
+            productsCategory.sort((a, b) => b.price - a.price)
+            console.log('after sort', list)
+        } else if (e === 'rating') {
+            list.sort((a, b) => b.rating.rate - a.rating.rate)
+            productsAll.sort((a, b) => b.rating.rate - a.rating.rate)
+            productsCategory.sort((a, b) => b.rating.rate - a.rating.rate)
+            console.log('after sort', list)
+        }
+        setQueryProducts(items => ({...items, sorting: e}))
+        console.log(queryProducts)
+    }
 
     return (
         <>
@@ -76,17 +111,19 @@ export default function CategoryQueryBar({id, queryProducts, setQueryProducts, p
                 </Button>
             </Col>
             <Col>
-                <Dropdown>
+                <Dropdown onSelect={sortProducts}>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                         Sort By&nbsp;
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item>Price: Low to High</Dropdown.Item>
+                        <Dropdown.Item eventKey='id' >Reset</Dropdown.Item>
                         <Dropdown.Divider />
-                        <Dropdown.Item>Price: High to Low</Dropdown.Item>
+                        <Dropdown.Item eventKey='lowToHigh' >Price: Low to High</Dropdown.Item>
                         <Dropdown.Divider />
-                        <Dropdown.Item>Rating</Dropdown.Item>
+                        <Dropdown.Item eventKey='highToLow' >Price: High to Low</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item eventKey='rating' >Rating</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </Col>

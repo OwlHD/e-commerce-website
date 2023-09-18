@@ -1,5 +1,5 @@
-import CategoryCard from "./CategoryCard"
 import CategoryQueryBar from "./CategoryQueryBar";
+import CategoryRender from "./CategoryRender";
 import Row from 'react-bootstrap/Row';
 import { useState, useEffect } from "react"
 import { getAllProducts } from "../../utils/functions"
@@ -29,27 +29,15 @@ export default function CategoryView({id}) {
         getProducts()
         setQueryProducts({query: '', list: [], sorting: queryProducts.sorting})
     },[id])
-    
-    //ProdutsAll.map -> ProductsAllFilter.map
+
     return (
         <Row>
             <CategoryQueryBar id={id} queryProducts={queryProducts} setQueryProducts={setQueryProducts} productsAll={productsAll} setProductsAll={setProductsAll} productsAllFilter={productsAllFilter} setProductsAllFilter={setProductsAllFilter} productsCategory={productsCategory} filters={filters} setFilters={setFilters} />
             <h1>{idUpper}</h1>
-            {(
-                queryProducts.query === '' 
-                ? id === 'all' 
-                    ? productsAll.map(item =>{
-                        return <div key={item.id} className="col-xs-12 col-sm-6 col-lg-4"><CategoryCard key={item.id} item={item} /></div>
-                    }) 
-                    : productsCategory.map(item =>{
-                        return <div key={item.id} className="col-xs-12 col-sm-6 col-lg-4"><CategoryCard key={item.id} item={item} /></div>
-                    })
-                : !queryProducts.list.length
-                    ? 'No results found.'
-                    : queryProducts.list.map(item => {
-                        return <div key={item.id} className="col-xs-12 col-sm-6 col-lg-4"><CategoryCard key={item.id} item={item} /></div>
-                    })
-            )}
+            {
+                
+            }
+            <CategoryRender id={id} queryProducts={queryProducts} filters={filters} productsAll={productsAll} productsCategory={productsCategory} />
         </Row>
     )
 }

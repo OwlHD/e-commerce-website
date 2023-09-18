@@ -42,6 +42,11 @@
   width: 100px;
 }
 
+.category-styling {
+  display: flex;
+  flex-direction: row;
+}
+
 .read-the-docs {
   color: #888;
 }

@@ -13,10 +13,11 @@ export default function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavDropdown title="Categories" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/category/1">Category 1</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/category/2">Category 2</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/category/3">Category 3</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/category/4">Category 4</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/category/all">All Items</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/category/electronics">Electronics</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/category/jewelery">Jewelery</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/category/men's clothing">Men's Clothing</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/category/women's clothing">Women's Clothing</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/login">Login</Nav.Link>

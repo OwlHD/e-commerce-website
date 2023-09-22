@@ -54,7 +54,7 @@ export default function NavBar({ setRefresh, user, setUser }) {
             </NavDropdown>
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
-            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+            <Nav.Link as={Link} to="/login">Login/Register</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

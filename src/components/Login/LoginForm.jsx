@@ -21,8 +21,6 @@ export default function LoginForm() {
         const name = event.target.name;
         const value = event.target.value;
         setUserInfo(values => ({...values, [name]:value}))
-        console.log(userInfo)
-        console.log('user info: ', user)
     }
 
     async function handleSubmit(event) {
@@ -55,44 +53,44 @@ export default function LoginForm() {
         <div className='card' style={{marginBottom: '5px'}}>
             <h2>Login</h2>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <Row className="mb-3">
-        <Form.Group as={Col} md="6" controlId="validationCustomUsername">
-          <Form.Label>Username</Form.Label>
-          <InputGroup hasValidation>
-            <Form.Control
-              type="text"
-              placeholder="Username"
-              aria-describedby="inputGroupPrepend"
-              required
-              name='username'
-              value={userInfo.username}
-              onChange={handleChange}
-            />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-            <Form.Control.Feedback type="invalid">
-              Please choose a username.
-            </Form.Control.Feedback>
-          </InputGroup>
-        </Form.Group>
+                <Row className="mb-3">
+                    <Form.Group as={Col} md="6" controlId="validationCustomUsername">
+                    <Form.Label>Username</Form.Label>
+                    <InputGroup hasValidation>
+                        <Form.Control
+                        type="text"
+                        placeholder="Username"
+                        aria-describedby="inputGroupPrepend"
+                        required
+                        name='username'
+                        value={userInfo.username}
+                        onChange={handleChange}
+                        />
+                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                        Please choose a username.
+                        </Form.Control.Feedback>
+                    </InputGroup>
+                    </Form.Group>
 
-        <Form.Group as={Col} md="6" controlId="validationCustom01">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            required
-            type="password"
-            placeholder="Password"
-            name='password'
-            value={userInfo.password}
-            onChange={handleChange}
-          />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-          <Form.Control.Feedback type="invalid">
-              Please choose a username.
-            </Form.Control.Feedback>
-        </Form.Group>
-      </Row>
-      <Button type="submit">Login</Button>
-    </Form>
+                    <Form.Group as={Col} md="6" controlId="validationCustom01">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                        required
+                        type="password"
+                        placeholder="Password"
+                        name='password'
+                        value={userInfo.password}
+                        onChange={handleChange}
+                    />
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                        Please choose a username.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Row>
+                <Button type="submit">Login</Button>
+            </Form>
         </div>
     )
 }

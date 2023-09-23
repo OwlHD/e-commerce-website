@@ -1,5 +1,13 @@
+import Row from 'react-bootstrap/Row';
+import LoginForm from '../components/Login/LoginForm';
+import RegisterForm from '../components/Login/RegisterForm';
+
 export default function Login() {
     return (
-        <div>Login</div>
+        <Row>
+                <LoginForm />
+
+                <RegisterForm />
+        </Row>
     )
 }

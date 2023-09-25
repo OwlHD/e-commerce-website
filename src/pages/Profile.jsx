@@ -1,5 +1,7 @@
+import ProfileView from "../components/Profile/ProfileView"
+
 export default function Profile() {
     return (
-        <div>Profile</div>
+        <ProfileView />
     )
 }

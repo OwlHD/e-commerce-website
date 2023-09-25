@@ -22,6 +22,20 @@ export async function getAllProducts() {
     }
 }
 
+export async function getAllUsers() {
+    const response = await fetch(`${API_URL}/users`)
+    const result = await response.json()
+    console.log(result)
+    return result
+}
+
+export async function getSingleUser(id) {
+    const response = await fetch(`${API_URL}/users/${id}`)
+    const result = await response.json()
+    console.log(result)
+    return result
+}
+
 export async function userLogin(userInfo) {
     try {
         const response = await fetch(`${API_URL}/auth/login`, {

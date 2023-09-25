@@ -8,14 +8,15 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function NavBar({ setRefresh, user, setUser }) {
   const navigate = useNavigate()
   function clearInfo() {
-    localStorage.removeItem('Username'); 
-    localStorage.removeItem('Token');
+    localStorage.removeItem('username'); 
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
     setUser({})
     navigate('/')
   }
 
   return (
-    (user.Token) 
+    (user.token) 
     ?
     <Navbar expand="lg" className="bg-primary bg-gradient" data-bs-theme='dark' fixed='top'>
       <Container>

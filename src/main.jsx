@@ -6,14 +6,14 @@ import Category from './pages/Category.jsx'
 import Login from './pages/Login.jsx'
 import Profile from './pages/Profile.jsx'
 import Cart from './pages/Cart.jsx'
-import {BrowserRouter, Routes, Route, Navigate, Outlet, useLocation} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Navigate, Outlet, useOutletContext, useLocation} from 'react-router-dom'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function RouteWrapper() {
   const location = useLocation()
-  return (JSON.parse(localStorage.getItem('Token'))) ? (
-    <Outlet />
+  return (JSON.parse(localStorage.getItem('token'))) ? (
+    <Outlet context={useOutletContext()}/>
   ) : (
     <Navigate 
       to={`/login/`}

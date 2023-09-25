@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import { userLogin } from '../../utils/functions';
+import { userLogin, getAllUsers } from '../../utils/functions';
 import { useOutletContext } from 'react-router-dom';
 
 export default function LoginForm() {
@@ -32,14 +32,19 @@ export default function LoginForm() {
         } else {
             event.preventDefault()
             const userData = await userLogin(userInfo)
+            const userList = await getAllUsers()
             if (userData != undefined) {
                 console.log('good', userData)
-                localStorage.setItem('Username', JSON.stringify(userInfo.username))
-                localStorage.setItem('Token', JSON.stringify(userData.token))
+                localStorage.setItem('username', JSON.stringify(userInfo.username))
+                localStorage.setItem('token', JSON.stringify(userData.token))
                 setUser({
-                    Username: userData.username,
+                    Username: userInfo.username,
                     Token: userData.token
                 })
+                console.log('user set', user)
+                const singleUser = userList.filter(user => user.username === userInfo.username)
+                console.log('single user', singleUser)
+                localStorage.setItem('id', JSON.stringify(singleUser[0].id))
                 navigate('/')
             } else {
                 console.log('bad', userData)

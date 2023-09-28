@@ -22,6 +22,28 @@ export async function getAllProducts() {
     }
 }
 
+export async function getSingleProduct(id) {
+    try {
+        const response = await fetch(`${API_URL}/products/${id}`)
+        const result = await response.json()
+        console.log(result)
+        return result
+    } catch (error) {
+        
+    }
+}
+
+export async function getUserCart(id) {
+    try {
+        const response = await fetch(`${API_URL}/carts/user/${id}`)
+        const result = await response.json()
+        console.log(result)
+        return result
+    } catch (error) {
+        return console.error(error)
+    }
+}
+
 export async function getAllUsers() {
     const response = await fetch(`${API_URL}/users`)
     const result = await response.json()

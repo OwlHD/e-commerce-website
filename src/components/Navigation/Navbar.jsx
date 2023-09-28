@@ -5,12 +5,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom'
 
-export default function NavBar({ setRefresh, user, setUser }) {
+export default function NavBar({ user, setUser }) {
   const navigate = useNavigate()
   function clearInfo() {
-    localStorage.removeItem('username'); 
+    /* localStorage.removeItem('username'); 
     localStorage.removeItem('token');
-    localStorage.removeItem('id');
+    localStorage.removeItem('id'); */
+    localStorage.clear()
     setUser({})
     navigate('/')
   }

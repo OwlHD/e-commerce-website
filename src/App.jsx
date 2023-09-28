@@ -5,11 +5,12 @@ import './App.css'
 
 function App() {
   const [user, setUser] = useState({})
-
+  const [cart,setCart] = useState([JSON.parse(localStorage.getItem('cart'))])
   useEffect(() => {
     const infoUser = JSON.parse(localStorage.getItem('username'))
     const infoToken = JSON.parse(localStorage.getItem('token'))
     const infoId = JSON.parse(localStorage.getItem('id'))
+    const infoCart = JSON.parse(localStorage.getItem('cart'))
     if (infoUser) {
       setUser(item => ({...item, username:infoUser}))
       console.log('good', user)
@@ -28,12 +29,19 @@ function App() {
     } else {
       console.log('id not found')
     }
+    if (infoCart) {
+      setUser(item => ({...item, cart:infoCart}))
+      setCart(infoCart)
+      console.log('good', user, cart)
+    } else {
+      console.log('cart not found')
+    }
   },[])
 
   return (
     <>
       <NavBar user={user} setUser={setUser} />
-      <Outlet context={{user, setUser}}/>
+      <Outlet context={{user, setUser, cart, setCart}}/>
     </>
   )
 }

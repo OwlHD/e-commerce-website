@@ -31,6 +31,7 @@ function App() {
       setCart(infoCart);
     } else {
       console.log('cart not found');
+      localStorage.setItem('cart', JSON.stringify([{ products: [] }]));
     }
   }, []);
 

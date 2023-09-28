@@ -1,7 +1,7 @@
-import HomePreview from "../components/Home/HomePreview"
+import HomePreview from '../components/Home/HomePreview';
 
 export default function Home() {
-    return (
-        <HomePreview />
-    )
+  return (
+    <HomePreview />
+  );
 }

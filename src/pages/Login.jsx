@@ -3,11 +3,11 @@ import LoginForm from '../components/Login/LoginForm';
 import RegisterForm from '../components/Login/RegisterForm';
 
 export default function Login() {
-    return (
-        <Row>
-                <LoginForm />
+  return (
+    <Row>
+      <LoginForm />
 
-                <RegisterForm />
-        </Row>
-    )
+      <RegisterForm />
+    </Row>
+  );
 }

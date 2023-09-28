@@ -34,9 +34,7 @@ export default function LoginForm() {
       event.preventDefault();
       const userData = await userLogin(userInfo);
       const userList = await getAllUsers();
-      console.log(userData)
       if (userData !== undefined) {
-        console.log('good', userData);
         localStorage.setItem('username', JSON.stringify(userInfo.username));
         localStorage.setItem('token', JSON.stringify(userData.token));
         setUser({

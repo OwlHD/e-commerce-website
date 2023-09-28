@@ -8,10 +8,8 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function NavBar({ user, setUser }) {
   const navigate = useNavigate()
   function clearInfo() {
-    /* localStorage.removeItem('username'); 
-    localStorage.removeItem('token');
-    localStorage.removeItem('id'); */
     localStorage.clear()
+    localStorage.setItem('cart', JSON.stringify([{products:[]}]))
     setUser({})
     navigate('/')
   }
@@ -21,7 +19,7 @@ export default function NavBar({ user, setUser }) {
     ?
     <Navbar expand="lg" className="bg-primary bg-gradient" data-bs-theme='dark' fixed='top'>
       <Container>
-        <Navbar.Brand as={Link} to="/">iShop</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">Amazon 2</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

@@ -19,7 +19,19 @@ export default function CategoryCard({item, cart}) {
     console.log(cartIndex)
     const newItem = {
       productId: item.id,
-      quantity: 1
+      quantity: 1,
+      product: {
+        id: item.id,
+        title: item.title,
+        price: item.price,
+        category: item.category,
+        description: item.description,
+        image: item.image,
+        rating: {
+          count: item.rating.count,
+          rate: item.rating.rate
+        }
+      }
     }
     if (cartIndex === -1) {
       console.log('adding item')
@@ -29,6 +41,7 @@ export default function CategoryCard({item, cart}) {
       console.log('updating quantity')
       cart[0].products[cartIndex].quantity++
       localStorage.setItem('cart', JSON.stringify(cart))
+      console.log('categoryCard', cart)
     }
     console.log('item added/updated', cart)
   }

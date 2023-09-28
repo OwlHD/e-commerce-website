@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import { userLogin, getAllUsers, getUserCart } from '../../utils/functions';
+import { userLogin, getAllUsers, getUserCart, getSingleProduct } from '../../utils/functions';
 import { useOutletContext } from 'react-router-dom';
 
 export default function LoginForm() {
@@ -47,7 +47,12 @@ export default function LoginForm() {
                 localStorage.setItem('id', JSON.stringify(singleUser[0].id))
                 const cart = await getUserCart(singleUser[0].id)
                 console.log('cart list: ', cart)
-                localStorage.setItem('cart', JSON.stringify(cart))
+                cart[0].products.forEach(async item => {
+                    const product = await getSingleProduct(item.productId)
+                    item.product = product
+                    console.log('after appending products', cart)
+                    localStorage.setItem('cart', JSON.stringify(cart))
+                })
                 navigate('/')
             } else {
                 console.log('bad', userData)

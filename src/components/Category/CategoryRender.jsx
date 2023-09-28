@@ -2,7 +2,16 @@ import { Row } from "react-bootstrap"
 import CategoryCard from "./CategoryCard"
 
 export default function CategoryRender({ id, queryProducts, filters, productsAll, productsCategory }) {
-  const cart = JSON.parse(localStorage.getItem('cart'))
+  const cart = [{products:[]}]
+  if (!JSON.parse(localStorage.getItem('cart'))) {
+    console.log('bad test')
+  } else {
+    const userCart = JSON.parse(localStorage.getItem('cart'))
+    userCart[0].products.forEach(item => {
+      cart[0].products.push(item)
+      console.log('test cart redner catnegory', cart)
+    })
+  }
     if (filters.filterByPrice === 'false') {
         return (
             <Row>

@@ -22,16 +22,16 @@ export default function HomePreview() {
     return (
         <div>
             <h1>Electronics</h1>
-            <ProductCarousel products={productsElectronics} />
+            <ProductCarousel products={productsElectronics} nav={'electronics'} />
             <br />
             <h1>Jewelery</h1>
-            <ProductCarousel products={productsJewelry} />
+            <ProductCarousel products={productsJewelry} nav={'jewelery'} />
             <br />
             <h1>Men's Clothing</h1>
-            <ProductCarousel products={productsMensClothing} />
+            <ProductCarousel products={productsMensClothing} nav={"men's clothing"} />
             <br />
             <h1>Women's Clothing</h1>
-            <ProductCarousel products={productsWomensClothing} />
+            <ProductCarousel products={productsWomensClothing} nav={"women's clothing"} />
 
         </div>
     )

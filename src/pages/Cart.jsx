@@ -1,36 +1,72 @@
 import { useState, useEffect } from "react"
-import { useOutletContext } from "react-router-dom"
-import { getSingleProduct } from '../utils/functions';
 import CartItem from '../components/Cart/CartItem';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
-    const { user, cart } = useOutletContext()
-    const [userCart, setUserCart] = useState([])
-    const laCarta = JSON.parse(localStorage.getItem('cart'))
+    const [refresh, setRefresh] = useState(false)
+    const [totalPrice, setTotalPrice] = useState(0)
+    const [totalItems, setTotalItems] = useState(0)
+    const [show, setShow] = useState(false);
+    const pageCart = JSON.parse(localStorage.getItem('cart'))
+    const navigate = useNavigate()
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     useEffect(()=>{
-        async function cartFunction() {
-            console.log('cart page use effect', user)
-            console.log('the cart', cart)
-            console.log('laCarta', laCarta)
-            laCarta[0].products.forEach(async element => {
-                console.log('cart loop', element.productId)
-                const cartItem = await getSingleProduct(element.productId)
-                console.log('adding to array cartItem', cartItem)
-                cartItem.quantity = element.quantity
-                console.log('adding to array quantity of cartItem', cartItem)
-                setUserCart(prevItems => {return [...prevItems, cartItem]})
-                console.log('getting cart items', userCart)
-            })
-        }
-        cartFunction()
-    },[])
+        let price = 0
+        let items = 0
+        pageCart[0].products.forEach(item => price += (item.product.price * item.quantity))
+        pageCart[0].products.forEach(item => items += item.quantity)
+        let p = parseFloat(price.toFixed(2))
+        setTotalPrice(p)
+        setTotalItems(items)
+    },[refresh])
+
+    function handleCheckout() {
+        localStorage.setItem('cart', JSON.stringify([{products:[]}]))
+        navigate('/')
+    }
+
     return (
         <div>
-            {userCart.map(item => {
-            return (
-                <CartItem userCart={userCart} item={item} />
-                )
-        })}
+            {pageCart[0].products.length > 0 
+                ? pageCart[0].products.map(item => {
+                    return (
+                        <div>
+                            <CartItem pageCart={pageCart} setRefresh={setRefresh} refresh={refresh} item={item} />
+                        </div>
+                        )
+                })
+                : <p>Cart is empty.</p>
+            }
+            {pageCart[0].products.length > 0
+            ? 
+            <Row className='cart-card'>
+                <Col xs={6} >
+                    <p>Subtotal ({totalItems} Items): ${totalPrice}</p>
+                </Col>
+                <Col xs={6} >
+                    <Button variant="primary" onClick={handleShow}>Proceed To Checkout</Button>
+
+                    <Modal show={show} onHide={handleClose} centered={true} backdrop="static" keyboard={false}>
+                        <Modal.Header>
+                        <Modal.Title>Order Successful!</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Please allow 3-7 business days for delivery. Thank you for shopping at Amazon 2!</Modal.Body>
+                        <Modal.Footer>
+                        <Button variant="primary" onClick={handleCheckout}>
+                            Close
+                        </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </Col>
+            </Row>
+        : <div></div>}
         </div>
     )
 }

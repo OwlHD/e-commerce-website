@@ -2,7 +2,7 @@ import Carousel from 'react-multi-carousel';
 import ProductPreview from './ProductPreview';
 import 'react-multi-carousel/lib/styles.css';
 
-export default function ProductCarousel({products}) {
+export default function ProductCarousel({products, nav}) {
     return (
         <Carousel
                 additionalTransfrom={0}
@@ -57,7 +57,7 @@ export default function ProductCarousel({products}) {
                 slidesToSlide={1}
                 swipeable
             >
-                {products.map((item) => (<ProductPreview key={item.id} item={item} />))}
+                {products.map((item) => (<ProductPreview key={item.id} item={item} nav={nav} />))}
             </Carousel>
     )
 }

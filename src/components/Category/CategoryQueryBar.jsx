@@ -7,7 +7,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { useState } from 'react';
 
 export default function CategoryQueryBar({
-  id, queryProducts, setQueryProducts, productsAll, setProductsAll, productsAllFilter, setProductsAllFilter, productsCategory, filters, setFilters,
+  id, queryProducts, setQueryProducts, productsAll, productsCategory, filters, setFilters,
 }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

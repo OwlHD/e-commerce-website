@@ -37,9 +37,6 @@ export default function CategoryView({ id }) {
         queryProducts={queryProducts}
         setQueryProducts={setQueryProducts}
         productsAll={productsAll}
-        setProductsAll={setProductsAll}
-        productsAllFilter={productsAllFilter}
-        setProductsAllFilter={setProductsAllFilter}
         productsCategory={productsCategory}
         filters={filters}
         setFilters={setFilters}

@@ -33,6 +33,15 @@
   }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  appearance: textfield;
+}
+
 .card {
   padding: 2em;
 }
@@ -40,6 +49,20 @@
 .preview-image {
   height: 200px;
   width: 100px;
+}
+
+.cart-card {
+  float: left;
+  width: 100%;
+  border: 1px solid white;
+  box-shadow: 0 0 1px black;
+  margin: 5px;
+}
+
+.cart-card-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .category-styling {

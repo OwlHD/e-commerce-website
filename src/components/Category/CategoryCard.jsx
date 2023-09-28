@@ -6,11 +6,45 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 
-export default function CategoryCard({item}) {
+export default function CategoryCard({item, cart}) {
+  console.log('item', item.id)
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  function handleCart(e, id) {
+    console.log(cart[0].products)
+    console.log('checking id', id)
+    const cartIndex = cart[0].products.findIndex(cartItem => cartItem.productId === id)
+    console.log(cartIndex)
+    const newItem = {
+      productId: item.id,
+      quantity: 1,
+      product: {
+        id: item.id,
+        title: item.title,
+        price: item.price,
+        category: item.category,
+        description: item.description,
+        image: item.image,
+        rating: {
+          count: item.rating.count,
+          rate: item.rating.rate
+        }
+      }
+    }
+    if (cartIndex === -1) {
+      console.log('adding item')
+      cart[0].products.push(newItem)
+      localStorage.setItem('cart', JSON.stringify(cart))
+    } else if (cart[0].products[cartIndex].productId === item.id) {
+      console.log('updating quantity')
+      cart[0].products[cartIndex].quantity++
+      localStorage.setItem('cart', JSON.stringify(cart))
+      console.log('categoryCard', cart)
+    }
+    console.log('item added/updated', cart)
+  }
 
     return (
       <>
@@ -22,7 +56,7 @@ export default function CategoryCard({item}) {
             <Card.Text>Rating: {item.rating.rate}({item.rating.count})</Card.Text>
             <Button variant="primary" onClick={handleShow}>More Details</Button>
             <br /><br />
-            <Button variant="primary">Add To Cart</Button>
+            <Button variant="primary" onClick={e => (handleCart(e, item.id))}>Add To Cart</Button>
           </Card.Body>
         </Card>
 
@@ -53,7 +87,7 @@ export default function CategoryCard({item}) {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant="primary" onClick={e => (handleCart(e, item.id))}>
               Add To Cart
             </Button>
           </Modal.Footer>
